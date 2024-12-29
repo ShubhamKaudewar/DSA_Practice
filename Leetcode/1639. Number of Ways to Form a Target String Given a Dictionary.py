@@ -7,26 +7,26 @@ class Solution:
         MOD = 10**9 + 7
 
         memo = {}
-        def dp(p_idx, c_idx, t_idx):
+        def dp(c_idx, t_idx):
             if t_idx >= k:
                 return 1
 
-            if (p_idx, c_idx, t_idx) in memo:
-                return memo[(p_idx, c_idx, t_idx)]
+            if (c_idx, t_idx) in memo:
+                return memo[(c_idx, t_idx)]
 
             l_cnt = 0
             for child_idx in range(len(words)):
                 tc_idx = c_idx
                 while l - tc_idx >= k - t_idx:
                     if words[child_idx][tc_idx] == target[t_idx]:
-                        l_cnt += dp(child_idx, tc_idx + 1, t_idx + 1)
+                        l_cnt += dp(tc_idx + 1, t_idx + 1)
                         l_cnt %= MOD
                     tc_idx += 1
 
-            memo[(p_idx, c_idx, t_idx)] = l_cnt
+            memo[(c_idx, t_idx)] = l_cnt
             return l_cnt
 
-        res = dp(-1, 0, 0)
+        res = dp(0, 0)
         return res
 
     def numWays2(self, words: List[str], target: str) -> int:
