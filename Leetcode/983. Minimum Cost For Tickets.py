@@ -1,26 +1,39 @@
 from typing import List
 
 class Solution:
+    # Optimized and lesser code
     def mincostTickets(self, days: List[int], costs: List[int]) -> int:
         dp = [0] * (len(days) + 1)
-        for p in range(len(days)-1, -1, -1):
+        for p in range(len(days) - 1, -1, -1):
             min_cost = float('inf')
             for ticket, cost in zip((1, 7, 30), costs):
-                if ticket == 1:
-                    curr_cost = cost + dp[p+1]
-                    min_cost = min(min_cost, curr_cost)
-                else:
-                    l = p
-                    while l < len(days) and l <= ticket+p:
-                        if days[l] >= days[p]+ticket:
-                            break
-                        if l == len(days):
-                            break
-                        l += 1
-                    curr_cost = cost + dp[l]
-                    min_cost = min(min_cost, curr_cost)
+                l = p
+                while l < len(days) and days[l] < days[p] + ticket:
+                    l += 1
+                min_cost = min(min_cost, cost + dp[l])
             dp[p] = min_cost
         return dp[0]
+
+    # def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+    #     dp = [0] * (len(days) + 1)
+    #     for p in range(len(days)-1, -1, -1):
+    #         min_cost = float('inf')
+    #         for ticket, cost in zip((1, 7, 30), costs):
+    #             if ticket == 1:
+    #                 curr_cost = cost + dp[p+1]
+    #                 min_cost = min(min_cost, curr_cost)
+    #             else:
+    #                 l = p
+    #                 while l < len(days) and l <= ticket+p:
+    #                     if days[l] >= days[p]+ticket:
+    #                         break
+    #                     if l == len(days):
+    #                         break
+    #                     l += 1
+    #                 curr_cost = cost + dp[l]
+    #                 min_cost = min(min_cost, curr_cost)
+    #         dp[p] = min_cost
+    #     return dp[0]
 
 if __name__ == '__main__':
     sol = Solution()
