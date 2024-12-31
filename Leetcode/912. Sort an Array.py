@@ -34,7 +34,13 @@ class Solution:
         return merged
 
     def sortArray(self, nums: List[int]) -> List[int]:
-        return self.mergeSort(nums)
+        # return self.mergeSort(nums)
+        return self.heapsort(nums)
+
+    def heapsort(self, nums):
+        from heapq import heapify, heappop
+        heapify(nums)
+        return [heappop(nums) for _ in range(len(nums))]
 
 if __name__ == '__main__':
     sol = Solution()
