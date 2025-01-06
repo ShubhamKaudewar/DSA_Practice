@@ -26,6 +26,33 @@ class TreeNode:
                 self.isIdentical(curr.left, subCurr.left) and
                 self.isIdentical(curr.right, subCurr.right))
 
+    def min_value(self, curr):
+        while curr.left:
+            curr = curr.left
+        return curr.val
+
+    def __delete_node(self, curr, value):
+        if not curr:
+            return None
+        if value < curr.val:
+            curr.left = self.__delete_node(curr.left, value)
+        elif value > curr.val:
+            curr.right = self.__delete_node(curr.right, value)
+        else:
+            if not curr.left and not curr.right:
+                return None
+            elif not curr.left:
+                curr = curr.right
+            elif not curr.right:
+                curr = curr.left
+            else:
+                sub_tree_min = self.min_value(curr.right)
+                curr.val = sub_tree_min
+                curr.right = self.__delete_node(curr.right, sub_tree_min)
+        return curr
+
+    def delete_node(self, root, value):
+        return self.__delete_node(root, value)
 
 if __name__ == '__main__':
     # Example usage
