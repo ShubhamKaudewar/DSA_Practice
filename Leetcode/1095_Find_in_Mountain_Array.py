@@ -16,8 +16,6 @@ $$O(\log(n))$$ for peak finding + $$O(\log(n))$$ for left and right searches = $
 
 - Space complexity:
 $$O(n)$$ for caching the accessed elements to minimize calls.
-
-# Code
 '''
 
 class MountainArray:
