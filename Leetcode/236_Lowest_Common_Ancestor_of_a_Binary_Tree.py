@@ -2,6 +2,10 @@ import pytest
 from helper import TreeNode
 
 class Solution:
+    """
+    To understand code watched this video just for intuation
+    https://www.youtube.com/watch?v=WO1tfq2sbsI
+    """
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         if not root:
             return root
