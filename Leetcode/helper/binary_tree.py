@@ -17,6 +17,14 @@ class TreeNode:
     def construct_binary_tree(self, arr):
         return self.insert_level_order(arr, None, 0, len(arr))
 
+    def isIdentical(self, curr, subCurr):
+        if not curr and not subCurr:
+            return True
+        if not curr or not subCurr:
+            return False
+        return (curr.val == subCurr.val and
+                self.isIdentical(curr.left, subCurr.left) and
+                self.isIdentical(curr.right, subCurr.right))
 
 
 if __name__ == '__main__':
