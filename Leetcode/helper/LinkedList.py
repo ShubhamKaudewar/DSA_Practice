@@ -11,12 +11,23 @@ class LinkedList:
         self.tail = new_node
         self.length = 1
 
+    @staticmethod
+    def is_similar(head_one, head_two):
+        while head_one is not None and head_two is not None:
+            if head_one.value != head_two.value:
+                return False
+            head_one = head_one.next
+            head_two = head_two.next
+        return head_one is None and head_two is None
+
     def print_list(self):
         temp = self.head
         while temp is not None:
             print(temp.value)
             temp = temp.next
-
+    
+    
+    
     def append(self, value):
         new_node = LinkedListNode(value)
         if self.head is None:
@@ -26,6 +37,14 @@ class LinkedList:
             self.tail.next = new_node
             self.tail = new_node
         self.length += 1
+    
+    def print_list_from_head(self, head):
+        temp = head
+        while temp is not None:
+            print(temp.value, end="")
+            temp = temp.next
+            if temp.next:
+                print("->", end="")
 
     def insertion_sort(self):
         if self.length < 2:
@@ -76,7 +95,9 @@ class LinkedList:
     def make_cycle(self):
         self.tail.next = self.head
         return self.head
-
+    
+    
+    
 class DoublyLinkedNode:
     def __init__(self, value):
         self.value = value
