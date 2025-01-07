@@ -1,9 +1,10 @@
-from collections import deque
-from typing import List, Optional
-from helper import TreeNode
 import pytest
+from typing import Optional, List
+from helper import TreeNode
+from collections import deque
 
 class Solution:
+    """Directly using this from 102_Binary_Tree_Level_Order_Traversal"""
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return []
@@ -22,14 +23,23 @@ class Solution:
             res.append(level_values)
         return res
 
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        if not root:
+            return []
+
+        level_values = self.levelOrder(root)
+        for level in level_values:
+            res.append(level[-1])
+        return res
 
 def test_case_1():
     sol = Solution()
     arr = [3, 9, 20, None, None, 15, 7]
     tree = TreeNode()
     root = tree.construct_binary_tree(arr)
-    expected = [[3], [9, 20], [15, 7]]
-    actual = sol.levelOrder(root)
+    expected = [3, 20, 7]
+    actual = sol.rightSideView(root)
     assert actual == expected
 
 def test_case_2():
@@ -37,8 +47,8 @@ def test_case_2():
     arr = [1,2,3,None,5,None,4]
     tree = TreeNode()
     root = tree.construct_binary_tree(arr)
-    expected = [[1], [2, 3], [5, 4]]
-    actual = sol.levelOrder(root)
+    expected = [1, 3, 4]
+    actual = sol.rightSideView(root)
     assert actual == expected
 
 if __name__ == '__main__':
