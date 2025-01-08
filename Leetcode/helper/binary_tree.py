@@ -1,8 +1,32 @@
+from typing import Optional, List
+from collections import deque
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
+
+    def output_level_order(self, root) -> List[List[Optional[int]]]:
+        if not root:
+            return []
+
+        queue = deque([root])
+        result = []
+
+        while queue:
+            current_level_values = []
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if node:
+                    current_level_values.append(node.val)
+                    queue.append(node.left if node.left else None)
+                    queue.append(node.right if node.right else None)
+                else:
+                    current_level_values.append(None)
+            result.append(current_level_values)
+
+        return result
 
     def insert_level_order(self, arr, root, i, n):
         if i < n:
