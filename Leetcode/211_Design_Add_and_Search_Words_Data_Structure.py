@@ -20,15 +20,24 @@ class WordDictionary:
             curr_node = curr_node.children[c]
         curr_node.is_end = True
         
-    def search(self, word: str) -> bool:
-        curr_node = self.wdNode
+    def search(self, word: str, curr_node=None) -> bool:
+        if curr_node is None:
+            curr_node = self.wdNode
+
+        if not word:
+            return curr_node.is_end
         
-        for c in word:
-            if c == ".":
-                
+        c = word[0]
+        if c == ".":
+            for child in curr_node.children.values():
+                if self.search(word[1:], child):
+                    return True
+            return False
+        else:
+            if c in curr_node.children:
+                return self.search(word[1:], curr_node.children[c])
             else:
-        
-        return True
+                return False
 
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()
@@ -55,7 +64,7 @@ def test_case_1():
             wd.addWord(value[0])
             response.append(None)
         elif command == "search":
-            response.append(wd.search(value[0]))
+            response.append(wd.search(value[0], wd.wdNode))
 
     expected = [None, None, None, None, False, True, True, True]
     assert response == expected
