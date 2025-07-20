@@ -1,4 +1,4 @@
-class TrieNode():
+class TrieNode:
     def __init__(self, val=None):
         self.val = val
         self.children = {}
