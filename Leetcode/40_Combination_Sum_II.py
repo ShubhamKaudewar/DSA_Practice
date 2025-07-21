@@ -1,3 +1,4 @@
+import pytest
 from typing import List
 import pytest
 
@@ -30,25 +31,19 @@ def test_case_1():
     sol = Solution()
     candidates = [10,1,2,7,6,1,5]
     target = 8
-    expected = [
-        [1,1,6],
-        [1,2,5],
-        [1,7],
-        [2,6]
-    ]
+    expected = [[1,1,6], [1,2,5], [1,7], [2,6]]
     actual = sol.combinationSum2(candidates, target)
     assert actual == expected
+
 
 def test_case_2():
     sol = Solution()
     candidates = [2,5,2,1,2]
     target = 5
-    expected = [
-        [1,2,2],
-        [5]
-    ]
+    expected = [[1,2,2], [5]]
     actual = sol.combinationSum2(candidates, target)
     assert actual == expected
-    
+
+
 if __name__ == '__main__':
     pytest.main()
