@@ -1,6 +1,5 @@
 import pytest
 from typing import List
-from helper.Trie import Trie
 
 class Solution:
     def countHillValley(self, nums: List[int]) -> int:
