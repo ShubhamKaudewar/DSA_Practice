@@ -2,6 +2,10 @@ import pytest
 from collections import Counter, deque
 
 class Solution:
+    """
+    This gif shows the algorithm logic
+    https://assets.leetcode.com/users/images/54bba303-2d66-4324-8408-e0117a3f4722_1750485191.153973.gif
+    """
     def minimumDeletions(self, word: str, k: int) -> int:
         freq = dict(Counter(word))
         freqs = sorted(freq.values())
