@@ -33,3 +33,22 @@ class Trie:
                 return False
             curr_node = curr_node.children[c]
         return True
+
+    def remove(self, word: str) -> bool:
+        def _remove(node, word, depth):
+            if depth == len(word):
+                if not node.is_end:
+                    return False  # Word not found
+                node.is_end = False
+                # If node has no children, it can be deleted
+                return len(node.children) == 0
+            c = word[depth]
+            if c not in node.children:
+                return False  # Word not found
+            can_delete = _remove(node.children[c], word, depth + 1)
+            if can_delete:
+                del node.children[c]
+                return not node.is_end and len(node.children) == 0
+            return False
+
+        return _remove(self.trieNode, word, 0)
