@@ -1,4 +1,5 @@
 import collections
+import pytest
 from typing import List
 
 class Solution:
@@ -33,11 +34,19 @@ class Solution:
                     islands += 1
         return islands
 
-sol = Solution()
-grid = [
-  ["1","1","1","1","0"],
-  ["1","1","0","1","0"],
-  ["1","1","0","0","0"],
-  ["0","0","1","0","1"]
-]
-print(sol.numIslands(grid))
+
+def test_case_1():
+    sol = Solution()
+    grid = [
+        ["1", "1", "1", "1", "0"],
+        ["1", "1", "0", "1", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "1", "0", "1"]
+    ]
+    expected = 3
+    actual = sol.numIslands(grid)
+    assert actual == expected
+
+if __name__ == '__main__':
+    pytest.main()
+
