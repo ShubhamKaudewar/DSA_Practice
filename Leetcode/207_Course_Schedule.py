@@ -34,7 +34,7 @@ class Solution:
                 return True
 
         visited.add(node)
-        visiting.remove(node)
+        visiting.discard(node)
         return False
 
     def graphBuilder(self, nodes: int, edges: List[List[int]]) -> Dict[int, List[int]]:
