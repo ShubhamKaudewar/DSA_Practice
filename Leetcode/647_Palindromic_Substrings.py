@@ -9,11 +9,11 @@ class Solution:
         count = 0
         n = len(s)
 
-        for idx, c in enumerate(s):
+        for i in range(n):
             l, r = 0, 0
 
-            while 0 <= idx-l <= idx+r < n:
-                if s[idx-l] == s[idx+r]:
+            while 0 <= i-l <= i+r < n:
+                if s[i-l] == s[i+r]:
                     count += 1
                     l += 1
                     r += 1
@@ -21,10 +21,11 @@ class Solution:
                 break
 
 
-        for idx, c in enumerate(s):
+        for i in range(n):
             l, r = 0, 1
-            while 0 <= idx-l <= idx+r < n:
-                if s[idx-l] == s[idx+r]:
+
+            while 0 <= i-l <= i+r < n:
+                if s[i-l] == s[i+r]:
                     count += 1
                     l += 1
                     r += 1
