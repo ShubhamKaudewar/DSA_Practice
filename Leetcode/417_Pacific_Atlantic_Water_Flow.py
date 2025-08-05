@@ -5,7 +5,7 @@ from collections import deque
 class Solution:
     """
     This question same approach of Q.286 with only difference of incrementing distance we increment minutes
-    we will be maintaining dedicated matrix for pacific and atlantic tiles. We will be doing bfs on seperate tiles
+    we will be maintaining dedicated matrix for pacific and atlantic tiles. We will be doing bfs on separate tiles
     starting from their edge tiles. We will be updating tile we are checking against has adjacent tile water goes to ocean and height is lower than checking one then we will flag curr to 1
     """
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
@@ -15,11 +15,11 @@ class Solution:
         q = deque()
         pacific_visit, atlantic_visit = set(), set()
         output = []
-        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)] # From gates and then next close dist we will go in all directions
+        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
         def bfs(o, r, c, dr, dc):
             x, y = r+dr, c+dc
-            if min(x, y) < 0 or x == row or y == col or heights[x][y] < heights[r][c]:  # if a cell value is not INF, it means the cell is one of: {gate, wall, a cell with the shortest distance updated alreadc}, we won't visit the cell again
+            if min(x, y) < 0 or x == row or y == col or heights[x][y] < heights[r][c]:
                 return
 
             visit = pacific_visit if o == pacificTiles else atlantic_visit
