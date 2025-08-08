@@ -5,13 +5,12 @@ from helper import Graph
 
 class Solution:
     """
-    This question follows the same multi-source BFS approach as Q.286 (Walls and Gates),
-    but instead of propagating distance, we mark edge-connected 'O's to avoid flipping.
+    This is standard Kahn's Algorithm: Topological order sort problem
     """
 
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        topological_order = Graph().topological_sort(prerequisites)
-        if topological_order == -1:
+        topological_order = Graph().topological_sort(numCourses, prerequisites)
+        if not topological_order:
             return False
         return True
 

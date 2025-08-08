@@ -65,48 +65,44 @@ class Graph:
         return True
 
 
-    def construct_adjacency_list(self, edges: List[List[int]]) -> Dict[int, List[int]]:
+    def construct_adjacency_list(self, V: int, edges: List[List[int]]) -> Dict[int, List[int]]:
         adj_map = defaultdict(list)
         for u, v in edges:
             adj_map[u].append(v)
+        for i in range(V):
+            adj_map.setdefault(i, [])
         return adj_map
 
 
-    def topological_sort(self, edges) -> Any[List[int], int]:
-        adj_map = self.construct_adjacency_list(edges)
+    def topological_sort(self, V: int, edges: List[List[int]]) -> List[int]:
+        adj_map = self.construct_adjacency_list(V, edges)
         neighbours = defaultdict(int)
         topological_order = []
 
-        for u in adj_map.keys():
-            neighbours[u] = 0
-
-        for v in adj_map.values():
-            for vertex in v:
+        for v_list in adj_map.values():
+            for vertex in v_list :
                 neighbours[vertex] += 1
 
+
         q = deque()
-        for vertex, in_degree in dict(neighbours).items():
-            if in_degree == 0:
-                q.append(vertex)
-                del neighbours[vertex]
+        for i in range(V):
+            if neighbours[i] == 0:
+                q.append(i)
 
         def bfs(u):
             for v in adj_map[u]:
                 neighbours[v] -= 1
                 if neighbours[v] == 0:
                     q.append(v)
-                    del neighbours[v]
-            del adj_map[u]
 
         while q:
             vertex = q.popleft()
             bfs(vertex)
             topological_order.append(vertex)
 
-        if neighbours:
-            return -1
+        if len(topological_order) != V:
+            return []
         return topological_order
-
 
 
 GraphNode.model_rebuild()
@@ -114,9 +110,9 @@ GraphNode.model_rebuild()
 
 def test_1():
     g = Graph()
-    # print(f"something")
+    V = 6
     edges = [[0, 1], [1, 2], [2, 3], [4, 5], [5, 1], [5, 2]]
-    actual = g.topological_sort(edges)
+    actual = g.topological_sort(V, edges)
     expected = [0, 4, 5, 1, 2, 3]
     assert expected == actual
 
