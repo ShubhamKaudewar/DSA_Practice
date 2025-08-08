@@ -1,7 +1,8 @@
 from __future__ import annotations
 from pydantic import BaseModel, Field
-from typing import List, Optional
-from collections import deque
+from typing import List, Optional, Dict, Any
+from collections import deque, defaultdict
+import pytest
 
 class GraphNode(BaseModel):
     val: int
@@ -64,4 +65,60 @@ class Graph:
         return True
 
 
+    def construct_adjacency_list(self, edges: List[List[int]]) -> Dict[int, List[int]]:
+        adj_map = defaultdict(list)
+        for u, v in edges:
+            adj_map[u].append(v)
+        return adj_map
+
+
+    def topological_sort(self, edges) -> Any[List[int], int]:
+        adj_map = self.construct_adjacency_list(edges)
+        neighbours = defaultdict(int)
+        topological_order = []
+
+        for u in adj_map.keys():
+            neighbours[u] = 0
+
+        for v in adj_map.values():
+            for vertex in v:
+                neighbours[vertex] += 1
+
+        q = deque()
+        for vertex, in_degree in dict(neighbours).items():
+            if in_degree == 0:
+                q.append(vertex)
+                del neighbours[vertex]
+
+        def bfs(u):
+            for v in adj_map[u]:
+                neighbours[v] -= 1
+                if neighbours[v] == 0:
+                    q.append(v)
+                    del neighbours[v]
+            del adj_map[u]
+
+        while q:
+            vertex = q.popleft()
+            bfs(vertex)
+            topological_order.append(vertex)
+
+        if neighbours:
+            return -1
+        return topological_order
+
+
+
 GraphNode.model_rebuild()
+
+
+def test_1():
+    g = Graph()
+    # print(f"something")
+    edges = [[0, 1], [1, 2], [2, 3], [4, 5], [5, 1], [5, 2]]
+    actual = g.topological_sort(edges)
+    expected = [0, 4, 5, 1, 2, 3]
+    assert expected == actual
+
+if __name__ == "__main__":
+    pytest.main()
