@@ -64,7 +64,6 @@ class Graph:
 
         return True
 
-
     def construct_adjacency_list(self, V: int, edges: List[List[int]]) -> Dict[int, List[int]]:
         adj_map = defaultdict(list)
         for u, v in edges:
@@ -72,7 +71,6 @@ class Graph:
         for i in range(V):
             adj_map.setdefault(i, [])
         return adj_map
-
 
     def topological_sort(self, V: int, edges: List[List[int]]) -> List[int]:
         adj_map = self.construct_adjacency_list(V, edges)
@@ -104,6 +102,36 @@ class Graph:
             return []
         return topological_order
 
+    @staticmethod
+    def valid_tree(n: int, edges: List[List[int]]) -> bool:
+        if n == 0:
+            return True
+
+        adj_map = defaultdict(list)
+        for u, v in edges:
+            adj_map[u].append(v)
+            adj_map[v].append(u)
+
+        visited = set()
+
+        def dfs(u, parent):
+            visited.add(u)
+            for neighbour in adj_map[u]:
+                if neighbour == parent:
+                    continue
+                if neighbour in visited:
+                    # cycle detected
+                    return False
+                if not dfs(neighbour, u):
+                    return False
+            return True
+
+        # Start DFS from node 0
+        if not dfs(0, -1):
+            return False
+
+        # Check connectivity: all nodes must be visited
+        return len(visited) == n
 
 GraphNode.model_rebuild()
 
