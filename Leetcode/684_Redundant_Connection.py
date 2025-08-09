@@ -9,6 +9,7 @@ class Solution:
     This is classic problem of UnionFind,
     https://youtu.be/1lNK80tOTfc?si=c7FntBcaCCUAqOGY&t=462 check from this time that using path compression we can
     find there is already path exist between node 1 <-> 4
+    This question can be solved using Prim's Algorithm: https://www.programiz.com/dsa/prim-algorithm
     """
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         uf = UnionFind(len(edges)) # This considers 0 as node
