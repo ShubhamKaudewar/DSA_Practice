@@ -1,6 +1,6 @@
 import pytest
 from typing import List
-from collections import defaultdict
+from helper import Graph
 
 
 class Solution:
@@ -9,34 +9,8 @@ class Solution:
     """
 
     def valid_tree(self, n: int, edges: List[List[int]]) -> bool:
-        if n == 0:
-            return True
-
-        adj_map = defaultdict(list)
-        for u, v in edges:
-            adj_map[u].append(v)
-            adj_map[v].append(u)
-
-        visited = set()
-
-        def dfs(u, parent):
-            visited.add(u)
-            for neighbour in adj_map[u]:
-                if neighbour == parent:
-                    continue
-                if neighbour in visited:
-                    # cycle detected
-                    return False
-                if not dfs(neighbour, u):
-                    return False
-            return True
-
-        # Start DFS from node 0
-        if not dfs(0, -1):
-            return False
-
-        # Check connectivity: all nodes must be visited
-        return len(visited) == n
+        is_valid_tree = Graph().valid_tree(n, edges, root=0)
+        return is_valid_tree
 
 def test_1():
     sol = Solution()

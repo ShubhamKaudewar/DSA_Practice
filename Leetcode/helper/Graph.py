@@ -103,7 +103,7 @@ class Graph:
         return topological_order
 
     @staticmethod
-    def valid_tree(n: int, edges: List[List[int]]) -> bool:
+    def valid_tree(n: int, edges: List[List[int]], root: int) -> bool:
         if n == 0:
             return True
 
@@ -127,7 +127,7 @@ class Graph:
             return True
 
         # Start DFS from node 0
-        if not dfs(0, -1):
+        if not dfs(root, -1):
             return False
 
         # Check connectivity: all nodes must be visited
