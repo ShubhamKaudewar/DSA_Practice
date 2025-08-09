@@ -1,23 +1,5 @@
 import pytest
-from helper import TreeNode
-
-class UnionFind:
-    def __init__(self):
-        self.parent = {chr(x): chr(x) for x in range(ord('a'), ord('z')+1)}
-    
-    def find(self, char):
-        if char != self.parent[char]:
-            self.parent[char] = self.find(self.parent[char])
-        return self.parent[char]
-    
-    def union(self, char1, char2):
-        root1 = self.find(char1)
-        root2 = self.find(char2)
-        
-        if root1 < root2:
-            self.parent[root2] = root1
-        else:
-            self.parent[root1] = root2
+from helper import CharUnionFindDirect
             
 class Solution:
     def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
@@ -26,7 +8,7 @@ class Solution:
         Example here: https://www.geeksforgeeks.org/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/
         Union Find Algorithm Explanation: https://yuminlee2.medium.com/union-find-algorithm-ffa9cd7d2dba
         """
-        uf = UnionFind()
+        uf = CharUnionFindDirect()
         for c1, c2 in zip(s1, s2):
             uf.union(c1, c2)
         
