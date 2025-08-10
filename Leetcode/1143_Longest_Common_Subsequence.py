@@ -13,9 +13,9 @@ class Solution:
         for i in range(row - 1, -1, -1):
             for j in range(col - 1, -1, -1):
                 if text1[i] == text2[j]:
-                    cache[i][j] = 1 + cache[i + 1][j + 1]
+                    cache[i][j] = 1 + cache[i + 1][j + 1] # We will be taking value of next diagonal index
                 else:
-                    cache[i][j] = max(cache[i + 1][j], cache[i][j + 1])
+                    cache[i][j] = max(cache[i + 1][j], cache[i][j + 1]) # We will take adjacent max value
 
         return cache[0][0]
 
