@@ -1,15 +1,12 @@
 from typing import List
+import pytest
 
 class Solution:
-    def __init__(self):
-        self.c = 0
-        self.m = None
-
     def coinChange(self, coins: List[int], amount: int) -> int:
         if not amount:
             return 0
-        self.m = [float('inf')] * (amount + 1)
-        self.m[0] = 0  # Initialize base case
+        cache = [float('inf')] * (amount + 1)
+        cache[0] = 0  # Initialize base case
 
         coins.sort()
 
@@ -17,12 +14,18 @@ class Solution:
             for c in coins:
                 if c > a:
                     break
-                self.m[a] = min(self.m[a], 1 + self.m[a - c])
+                cache[a] = min(cache[a], 1 + cache[a - c])
 
-        return self.m[amount] if self.m[amount] != float('inf') else -1
+        return cache[amount] if cache[amount] != float('inf') else -1
 
-if __name__ == '__main__':
+
+def test_case_1():
     sol = Solution()
     coins = [1, 2, 5]
-    target = 11
-    print(sol.coinChange(coins, target))
+    amount = 11
+    actual = sol.coinChange(coins, amount)
+    expected = 3
+    assert actual == expected
+
+if __name__ == '__main__':
+    pytest.main()
