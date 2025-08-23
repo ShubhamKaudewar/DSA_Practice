@@ -8,7 +8,7 @@
 * Question
   * [152 - Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
   * [918 - Maximum Sum Circular Subarray]()
-  * [52 - Maximum Subarray]()
+  * [52 - Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
   * [2272 - Substring With Largest Variance]()
 > Kahn’s Algorithm (BFS-based topological sort)
 * Question
