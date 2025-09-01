@@ -70,6 +70,13 @@ class Graph:
             adj_map[u].append((v, w))
         return adj_map
 
+    def construct_adjacency_list_bidirected_weighted(self, edges: List[List[Union[int, str]]]):
+        adj_map = defaultdict(list)
+        for u, v, w in edges:
+            adj_map[u].append((v, w))
+            adj_map[v].append((u, w))
+        return adj_map
+
     def construct_adjacency_list(self, V: int, edges: List[List[Union[int, str]]]) -> Dict[int, List[Union[int, str]]]:
         adj_map = defaultdict(list)
         for u, v in edges:

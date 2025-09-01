@@ -1,14 +1,11 @@
 import pytest
-from collections import defaultdict
 from typing import List
 import heapq
+from helper import Graph
 
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        adj_map = defaultdict(list)
-        for u, v, w in times:
-            adj_map[u].append((v, w))
-
+        adj_map = Graph().construct_adjacency_list_directed_weighted(times)
         minHeap = [(0, k)]
         visited = set()
         min_time = 0
