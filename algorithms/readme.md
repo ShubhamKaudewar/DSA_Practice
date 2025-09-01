@@ -16,3 +16,6 @@
 > Dijkstra’s Algorithm (BFS-based)
 * Question
   * [743. Network Delay Time](https://leetcode.com/problems/network-delay-time/description/)
+> Prim’s Algorithm
+* Question
+  * [1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description/)

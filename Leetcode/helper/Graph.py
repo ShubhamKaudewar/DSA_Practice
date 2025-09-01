@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
 from collections import deque, defaultdict
 import pytest
 
@@ -64,7 +64,13 @@ class Graph:
 
         return True
 
-    def construct_adjacency_list(self, V: int, edges: List[List[int]]) -> Dict[int, List[int]]:
+    def construct_adjacency_list_directed_weighted(self, edges: List[List[Union[int, str]]]):
+        adj_map = defaultdict(list)
+        for u, v, w in edges:
+            adj_map[u].append((v, w))
+        return adj_map
+
+    def construct_adjacency_list(self, V: int, edges: List[List[Union[int, str]]]) -> Dict[int, List[Union[int, str]]]:
         adj_map = defaultdict(list)
         for u, v in edges:
             adj_map[u].append(v)
