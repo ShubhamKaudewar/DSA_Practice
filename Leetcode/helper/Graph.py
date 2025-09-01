@@ -91,7 +91,7 @@ class Graph:
         topological_order = []
 
         for v_list in adj_map.values():
-            for vertex in v_list :
+            for vertex in v_list:
                 neighbours[vertex] += 1
 
 
