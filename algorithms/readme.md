@@ -13,3 +13,6 @@
 > Kahn’s Algorithm (BFS-based topological sort)
 * Question
   * [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)
+> Dijkstra’s Algorithm (BFS-based)
+* Question
+  * [743. Network Delay Time](https://leetcode.com/problems/network-delay-time/description/)
