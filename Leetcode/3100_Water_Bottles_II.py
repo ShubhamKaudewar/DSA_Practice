@@ -18,13 +18,13 @@ class Solution:
                 full_bottles = 0
         return drunk_bottles
 
-# def test_case_1():
-#     sol = Solution()
-#     numBottles = 13
-#     numExchange = 6
-#     actual = sol.maxBottlesDrunk(numBottles, numExchange)
-#     expected = 15
-#     assert actual == expected
+def test_case_1():
+    sol = Solution()
+    numBottles = 13
+    numExchange = 6
+    actual = sol.maxBottlesDrunk(numBottles, numExchange)
+    expected = 15
+    assert actual == expected
 
 def test_case_2():
     sol = Solution()
