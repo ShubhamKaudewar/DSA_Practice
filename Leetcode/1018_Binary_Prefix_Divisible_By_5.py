@@ -3,6 +3,15 @@ import pytest
 
 class Solution:
     def prefixesDivBy5(self, nums: List[int]) -> List[bool]:
+        """This complexity of overall is n"""
+        val = 0
+        for i in range(len(nums)):
+            val = ((val << 1) + nums[i]) % 5
+            nums[i] = val == 0
+        return nums
+
+    def prefixesDivBy5_1(self, nums: List[int]) -> List[bool]:
+        """This complexity of int(binary, 2) is n so overall is n*n"""
         ans = []
         binary = ""
         for num in nums:
