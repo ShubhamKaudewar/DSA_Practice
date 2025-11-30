@@ -1,10 +1,6 @@
-import heapq
-from copy import deepcopy
 from typing import List
 import pytest
 from functools import lru_cache
-
-from random_questions.reddit_thread import ans_str
 
 
 class Solution:
