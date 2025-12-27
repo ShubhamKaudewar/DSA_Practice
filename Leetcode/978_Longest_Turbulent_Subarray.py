@@ -1,6 +1,5 @@
 import pytest
 from typing import List
-from statistics import median
 
 class Solution:
     def maxTurbulenceSize(self, arr: List[int]) -> int:
